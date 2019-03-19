@@ -3,15 +3,7 @@
 <style type='text/css'>
 body{font-family:'Open Sans',sans-serif;background: #fff;}
 *{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
-#table-outer{padding:7px 10px;margin:0 auto}
-#table-outer table{width:auto;margin:0 auto}
-#table-outer form{font:inherit}
-#table-outer label{display:block;text-align:right;margin:0 10px 0 0;padding:4px 0 0}
-#table-outer select[disabled]{opacity:.4}
 #post-searcher{display:block;margin:0;padding:0}
-#table-outer input,#table-outer select{width:100%;border:1px solid #dedede;border-radius:5px;margin:0;padding:5px;font-family: Roboto,sans-serif!important;font-size:16px!important;font-weight:500!important;text-transform:capitalize!important;outline:0;color:#333!important;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
-#table-outer select option{min-height:1.4em!important;}
-#table-outer input#feed-q{padding:5px 10px!important;}
 #feed-container{background:#fff;display:block;clear:both;margin:0;padding:0;list-style:none;height:400px;overflow-x:hidden;position:relative;border-top:none}
 #feed-container li{list-style:none;margin:0;padding:0;border-top:1px solid #eee;color:#555;width:auto;float:left;display:inline}
 #feed-container li .inner{margin:15px 0;height:auto;overflow:hidden;word-wrap:break-word;text-overflow:ellipsis}
@@ -33,23 +25,9 @@ body{font-family:'Open Sans',sans-serif;background: #fff;}
 #feedContainer li{float:none;display:block;width:auto;height:auto}
 #feed-container li .news-text, #feedContainer:after,#feed-container li img{display:none!important}
 }
-@media screen and (max-width:414px){#table-outer table,#feed-container li{width:100%;}
-#table-outer table,#table-outer label{text-align:center}
-#table-outer table td{display:block;margin:0 auto 5px;clear:both;float:none}
-#table-outer label{margin:0;}
-#table-outer{padding:0;}
-}
+
 </style>
-<div id="table-outer">
-<table><tbody>
-<tr><td><label for="feed-order">Urutkan artikel berdasarkan:</label></td> <td><select id="feed-order"> <option selected="" value="published">Artikel terbaru</option> <option value="updated">Artikel yang terakhir di update</option> </select></td></tr>
-<tr><td><label for="label-sorter">Filter artikel berdasarkan kategori:</label></td> <td><select disabled="" id="label-sorter"> <option selected="">Loading....</option> </select></td></tr>
-<tr>                 <td><label for="feed-q">Cari artikel dengan kata kunci:</label></td> <td><form id="post-searcher">
-<input id="feed-q" type="text" placeholder="Ketik dan tekan ENTER"/>
-</form>
-</td></tr>
-</tbody></table>
-</div>
+
 <header id="result-desc"></header>
 <ul id="feed-container"></ul>
 <div id="feed-nav">
@@ -58,16 +36,7 @@ body{font-family:'Open Sans',sans-serif;background: #fff;}
 var label="domain";
 </script>
 <script>
-function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-    var pair = vars[i].split("=");
-    if(pair[0] == variable){return pair[1];}
-  }
-  return(false);
-}
-</script>
+
 <script type='text/javaScript'>
 document.write;var loadToc,loadCategories,_toc={init:function(){var cfg={homePage:getQueryVariable("url"),maxResults:10,numChars:270,thumbWidth:140,thumbHeight:95,navText:"Tampilkan artikel selanjutnya &#9660;",resetToc:"Kembali ke Awal",noImage:"//2.bp.blogspot.com/-ex3V86fj4dQ/UrCQQa4cLsI/AAAAAAAAFdA/j2FCTmGOrog/s1100/no-thumbnail.png",loading:"<span>Memuat...</span>",counting:"<div>Memuat artikel...</div>",searching:"<span>Mencari...</span>"},w=window,d=document,el=function(id){return d.getElementById(id);},o={a:el('feed-order'),b:el('label-sorter').parentNode,c:el('post-searcher'),d:el('feed-q'),e:el('result-desc'),f:el('feed-container'),g:el('feed-nav'),h:d.getElementsByTagName('head')[0],i:0,j:null,k:'published',l:0,m:""},fn={a:function(){old=el('temporer-script');old.parentNode.removeChild(old);},b:function(param){var script=d.createElement('script');script.type="text/javascript";script.id="temporer-script";script.src=param;if(el('temporer-script'))fn.a();o.h.appendChild(script);},c:function(mode,tag,order){o.i++;o.e.innerHTML=cfg.counting;o.g.innerHTML=cfg[mode==1?"searching":"loading"];if(mode===0){fn.b(tag!==null?cfg.homePage+'/feeds/posts/summary/-/'+ tag+'?alt=json-in-script&start-index='+((o.i*cfg.maxResults)+ 1)+'&max-results='+ cfg.maxResults+'&orderby='+ order+'&callback=loadToc':cfg.homePage+'/feeds/posts/summary?alt=json-in-script&start-index='+((o.i*cfg.maxResults)+ 1)+'&max-results='+ cfg.maxResults+'&orderby='+ order+'&callback=loadToc');}else if(mode==1){fn.b(cfg.homePage+'/feeds/posts/summary?alt=json-in-script&start-index='+((o.i*cfg.maxResults)+ 1)+'&max-results='+ cfg.maxResults+'&q='+ tag+'&orderby='+ order+'&callback=loadToc');}
 o.j=(tag!==null)?tag:null;o.l=mode;o.a.disabled=true;o.b.children[0].disabled=true;},d:function(json){var _h;o.g.innerHTML="";o.e.innerHTML=o.l==1?'<span>Hasil penelusuran untuk kata kunci <b>&#8220;'+ o.m+'&#8221;</b> ('+ json.feed.openSearch$totalResults.$t+' Hasil)</span>':'<div>Total: '+ json.feed.openSearch$totalResults.$t+' Artikel</div>';if("entry"in json.feed){var a=json.feed.entry,b,c,_d,e="0 Komentar",f="",g;for(var i=0;i<cfg.maxResults;i++){if(i==a.length)break;b=a[i].title.$t;_d=("summary"in a[i])?a[i].summary.$t.replace(/<br ?\/?>/ig," ").replace(/<(.*?)>/g,"").replace(/<iframe/ig,"").substring(0,cfg.numChars):"";g=("media$thumbnail"in a[i])?a[i].media$thumbnail.url.replace(/.*?:\/\//g , "//").replace(/\/s[0-9]+\-c/,"\/s"+ cfg.thumbWidth+""):cfg.noImage.replace(/\/s[0-9]+\-c/,"\/s"+ cfg.thumbWidth+"");for(var j=0,jen=a[i].link.length;j<jen;j++){c=(a[i].link[j].rel=="alternate")?a[i].link[j].href:"#";}
