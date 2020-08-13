@@ -1,0 +1,5 @@
+# robotstxt.org/
+
+User-agent: *
+
+Sitemap: https://kandra-id.github.io/susu-kambing/sitemap.xml
